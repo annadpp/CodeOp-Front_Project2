@@ -1,18 +1,14 @@
 const game = {
-    // booleà per controlar el canvi de torns
     xTurn: true,
-    // estat de X, matriu de strings
     xState: [],
-    // estat de O, matriu de strings
     oState: [],
-    // possibles combinacions que guanyen la partida
-    winningStates: [
-        // Files
+    winningCombs: [
+        // Rows
         ['0', '1', '2'],
         ['3', '4', '5'],
         ['6', '7', '8'],
 
-        // Columnes
+        // Columns
         ['0', '3', '6'],
         ['1', '4', '7'],
         ['2', '5', '8'],
@@ -22,30 +18,52 @@ const game = {
         ['2', '4', '6']
     ]
 }
-
-// El teu codi aquí
-
-document.addEventListener('click', event => {
-    // Accedeix als elements html necessaris
-
-    // El jugador fa click a una casella buida
-        // Aconsegueix el valor de la casella clicada
-        // Afegeix el valor de la casella a la matriu del jugador que li toca
-        // Dona les classes adients a la casella clicada
-        // Canvia de torn
-
-    // Comprova si és empat
-
-    // Comprova si hi ha guanyador
-
-});
+/////////////* // MENU // */////////////
 
 
-// Botó de restart
-document.querySelector('.restart').addEventListener('click', () => {
-    // Treu totes les classes afegides
+/////////////* // 1 v 1 // */////////////
 
-    // Torna els estats i torn al seu estat inicial
-    
-});
+const cells = document.querySelectorAll("[data-cell]");
 
+function setupCell(cells, game) {
+
+   // X / 0 stay on click
+  cells.forEach(cell => {
+    cell.addEventListener('click', e => {
+      const target = e.target;
+      const cellValue = target.dataset.value;
+
+      if (!target.classList.contains("disabled")) {
+        target.classList.add("disabled");
+        game.xTurn ? game.xState.push(cellValue) : game.oState.push(cellValue);
+        target.classList.add(game.xTurn ? 'x' : 'o');
+        game.xTurn = !game.xTurn;
+      }
+    });
+
+    // X / O appear on hover
+    cell.addEventListener('mouseover', e => {
+      const target = e.target;
+      if (!target.classList.contains("disabled")) {
+        target.classList.add(game.xTurn ? 'x' : 'o');
+      }
+    });
+
+    cell.addEventListener('mouseout', e => {
+      const target = e.target;
+      if (!target.classList.contains("disabled")) {
+        target.classList.remove('x', 'o');
+      }
+    });
+  });
+  
+
+}
+
+setupCell(cells, game);
+
+
+/////////////* // 1 v CPU // */////////////
+
+
+/////////////* // GAME OVER // */////////////
