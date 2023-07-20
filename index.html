@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="output.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/dd918bcd41.js" crossorigin="anonymous"></script>
   <script src="tictactoe.js" defer></script>
   <script src="index.js" defer></script>
 
@@ -14,7 +15,7 @@
 
 <body class="bg-dark flex flex-col justify-center items-center h-screen">
   <!-- Pantalla inicial -->
-  <div id="start" class="w-[520px]">
+  <div id="start" class="hidden w-[520px]">
     <div class="flex justify-center">x o</div>
     <div class="rounded-lg bg-middle p-5 my-5 flex flex-col text-center">
       <p class="mb-5">xxxxxxx</p>
@@ -37,44 +38,53 @@
   </div>
 
   <!-- Taulell del joc -->
-  <div id="game" class="hidden flex flex-col w-[520px]">
+  <div id="game" class="flex flex-col w-[520px]">
     <div id="info-top" class="grid grid-cols-3 gap-5">
       <div class="flex items-end">x o</div>
       <div class="bg-middle rounded-lg h-10 drop-shadow-[0_5px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        x</div>
+        xxxxxx</div>
       <div
         class="bg-light rounded-lg h-10 w-10 drop-shadow-[0_5px_0_rgba(106,131,139,0.75)] flex justify-self-end justify-center items-center">
-        x
+        <i class="fa-solid fa-arrow-rotate-right"></i>
       </div>
     </div>
     <div class="grid grid-cols-3 grid-rows-3 gap-5 place-items-center my-5" id="board">
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        1</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="0">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        2</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="1">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        3</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="2">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        4</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="3">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        5</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="4">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        6</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="5">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        7</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="6">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        8</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="7">
+      </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center">
-        9</div>
+        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center"
+        data-cell data-value="8">
+      </div>
     </div>
     <div id="info-bot" class="grid grid-cols-3 gap-5">
       <div class="bg-turquoise rounded-lg h-20 flex justify-center items-center">x</div>

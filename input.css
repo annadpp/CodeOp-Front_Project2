@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 @layer components {
-  .card {
+  .x::after {
+    content: "❌";
+  }
+
+  .o::after {
+    content: "⭕";
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    user-select: none;
   }
 }
-
-/* Board style */
-
-/* Pseudo elements */
-
-/* Tile style */
-
-/* Game over window */
