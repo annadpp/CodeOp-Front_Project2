@@ -19,25 +19,31 @@
 
 <body class="bg-dark flex flex-col justify-center items-center h-screen">
   <!-- Pantalla inicial -->
-  <div id="start" class="w-[550px] text-center ">
-    <div class="rounded-lg bg-middle p-5 my-5 h-[350px] flex flex-col text-center items-center">
-      <div id="title" class="flex flex-col text-light text-[100px] drop-shadow-[0_5px_0_rgb(172,157,136)]">
-        <p>gatito</p>
-        <p class="flex"><span class="inline rotate-izq">tac</span>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="inline rotate-der">toe</span>
+  <div id="start" class="w-[85vw] sm:w-[550px] text-center ">
+    <div
+      class="rounded-lg bg-middle p-5 my-5 h-[500px] sm:h-[350px] flex flex-col text-center items-center justify-center sm:justify-normal">
+      <div id="title"
+        class="flex flex-col text-light text-[13vw] leading-[13vw] title-min sm:text-[100px] sm:leading-[110px] drop-shadow-[0_5px_0_rgb(172,157,136)]">
+        <p class="mt-[-20px]">gatito</p>
+        <p class="flex"><span class="inline rotate-izq">tac </span> &nbsp;
+          <span class="hidden sm:inline-block">&nbsp;&nbsp;&nbsp;</span>
+          <span class="inline rotate-der"> toe</span>
         </p>
-      </div>div>
-      <img class="mt-[-190px] w-[450px]" src="./img/651808.png" alt="">
-    </div>
-    <div class="flex flex-col gap-y-5 mt-10 w-full justify-center items-center">
-      <div id="one-vs-CPU"
-        class="rounded-lg bg-grey h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgb(63,60,60)] cursor-pointer w-full">
-        <p class="text-xl text-darker">JUEGO NUEVO <span class="drop-shadow-[1px_1px_0_rgb(0,0,0)]">1 VS. CPU</span></p>
       </div>
+      <img class="w-[60vw] max-w-[280px] min-w-[250px] mt-[-11vw] sm:mt-[-180px] sm:w-[450px] sm:max-w-[450px]"
+        src="./img/651808.png" alt="">
+    </div>
+    <div class="flex flex-col gap-y-5 sm:mt-10 w-full justify-center items-center">
       <div id="one-vs-one"
-        class="rounded-lg bg-orange h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgb(170,90,29)] cursor-pointer w-full">
-        <p class="text-xl text-darker">JUEGO NUEVO <span class="drop-shadow-[1px_1px_0_rgb(0,0,0)]">1 VS. 1</span></p>
+        class="rounded-lg bg-orange h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgb(170,90,29)] cursor-pointer w-full transform ease-in-out duration-300  hover:scale-95">
+        <p class="text-lg sm:text-xl text-darker">JUEGO NUEVO <span class="drop-shadow-[1px_1px_0_rgb(0,0,0)]">1 VS.
+            1</span>
+        </p>
+      </div>
+      <div id="one-vs-CPU"
+        class="rounded-lg bg-grey h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgb(63,60,60)] cursor-pointer w-full transform ease-in-out duration-300 hover:scale-95">
+        <p class="text-lg sm:text-xl text-darker">JUEGO NUEVO <span class="drop-shadow-[1px_1px_0_rgb(0,0,0)]">1 VS.
+            CPU</span></p>
       </div>
       <div
         class="mb-10 inline-flex items-center justify-center text-sm bg-grey bg-opacity-20 w-[200px] rounded-lg py-1">
@@ -48,98 +54,100 @@
   </div>
 
   <!-- Taulell del joc -->
-  <div id="game-table" class="hidden flex flex-col w-[520px]">
-    <div id="info-top" class="grid grid-cols-3 gap-5">
+  <div id="game-table" class="hidden flex flex-col w-[85vw] sm:w-[520px]">
+    <div id="info-top" class="grid grid-cols-3 gap-[3vw] sm:gap-5">
       <div
         class="bg-orange rounded-lg h-10 w-full drop-shadow-[0_5px_0_rgb(170,90,29)] flex flex-col justify-center items-center">
-        <p class="text-lg text-darkest">RONDA <span id="rounds" class="drop-shadow-[1px_1px_0_rgb(0,0,0)]"></span></p>
+        <p class="text-md sm:text-lg text-darkest">RONDA <span id="rounds"
+            class="drop-shadow-[1px_1px_0_rgb(0,0,0)]"></span></p>
       </div>
       <div class="bg-light rounded-lg h-10 drop-shadow-[0_5px_0_rgb(172,157,136)] flex justify-center items-center">
         <div class="inline-flex items-center">
-          <p class="mr-2 text-lg">TURNO</p>
-          <img id="turns" src="" alt="" class="w-[30px]">
+          <p class="mr-1 text-md sm:mr-2 sm:text-lg">TURNO</p>
+          <img id="turns" src="" alt="" class="w-[22px] sm:w-[30px]">
         </div>
       </div>
       <div id="reset"
         class="bg-grey rounded-lg h-10 w-10 drop-shadow-[0_5px_0_rgb(63,60,60)] flex justify-self-end justify-center items-center cursor-pointer">
-        <i class="fa-solid fa-arrow-rotate-right"></i>
+        <i class="fa-solid fa-arrow-rotate-right rotate-on-hover"></i>
       </div>
     </div>
-    <div class="grid grid-cols-3 grid-rows-3 gap-5 place-items-center my-5" id="board">
+    <div class="grid grid-cols-3 grid-rows-3 gap-[3vw] sm:gap-5 place-items-center my-14 sm:my-5" id="board">
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="0">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="1">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="2">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="3">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="4">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="5">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="6">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="7">
       </div>
       <div
-        class="rounded-lg bg-middle h-40 w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
+        class="rounded-lg bg-middle w-[25vw] h-[25vw] sm:h-40 sm:w-40 drop-shadow-[0_8px_0_rgba(15,34,43,0.75)] flex justify-center items-center cursor-pointer"
         data-cell data-value="8">
       </div>
     </div>
-    <div id="info-bot" class="grid grid-cols-3 gap-5">
-      <div class="bg-orange rounded-lg h-20 flex flex-col justify-center items-center">
+    <div id="info-bot" class="grid grid-cols-3 gap-[3vw] sm:gap-5">
+      <div class="bg-orange rounded-lg h-16 sm:h-20 flex flex-col justify-center items-center pt-4">
         <div class="inline-flex items-center">
-          <p class="mr-2 text-lg text-darkest">GANADAS</p>
-          <img src="img/culo.png" alt="Your Image" class="w-[30px]">
+          <p class="mr-1 text-md sm:mr-2 sm:text-lg text-darkest">GANA</p>
+          <img src="img/culo.png" alt="Your Image" class="w-[22px] sm:w-[30px]">
         </div>
-        <p id="wins-X" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-3xl"></p>
+        <p id="wins-X" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-2xl sm:text-3xl pb-3"></p>
       </div>
-      <div class="bg-light rounded-lg h-20 flex flex-col justify-center items-center">
-        <p class="text-lg text-darkest">EMPATES</p>
-        <p id="draws" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-3xl"></p>
+      <div class="bg-light rounded-lg h-16 sm:h-20 flex flex-col justify-center items-center pt-4">
+        <p class="mr-1 text-md sm:mr-2 sm:text-lg text-darkest">EMPATE</p>
+        <p id="draws" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-2xl sm:text-3xl mb-3"></p>
       </div>
-      <div class="bg-grey rounded-lg h-20 flex flex-col justify-center items-center">
+      <div class="bg-grey rounded-lg h-16 sm:h-20 flex flex-col justify-center items-center pt-4">
         <div class="inline-flex items-center">
-          <p class="mr-2 text-lg text-darkest">GANADAS</p>
-          <img src="img/cara.png" alt="Your Image" class="w-[30px]">
+          <p class="mr-1 text-md sm:mr-2 sm:text-lg text-darkest">GANA</p>
+          <img src="img/cara.png" alt="Your Image" class="w-[22px] sm:w-[30px]">
         </div>
-        <p id="wins-O" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-3xl"></p>
+        <p id="wins-O" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-2xl sm:text-3xl mb-3"></p>
       </div>
     </div>
   </div>
 
   <!-- Missatge de final de partida -->
-  <div id="game-over" class="hidden absolute bg-dark h-[380px] flex flex-col justify-around w-full items-center pt-10">
-    <div id="game-over-text" class="flex flex-col text-light">
+  <div id="game-over"
+    class="hidden absolute bg-dark h-[340px] sm:h-[380px] flex flex-col justify-around w-full items-center pt-10">
+    <div id="game-over-text" class="flex flex-col justify-center items-center text-light">
       <p class="text-center text-2xl">xxxx</p>
-      <img id="img-game-over" class="h-[150px] my-6" src="" alt="">
+      <img id="img-game-over" class="h-[120px] w-[120px] sm:h-[150px] sm:w-[150px] my-6" src="" alt="">
       <p class="text-orange text-center">xxxx</p>
     </div>
-    <div class="flex gap-3 w-[250px] pb-10 mt-10">
+    <div class="flex gap-3 w-[220px] sm:w-[250px] px-5 sm:px-0 pb-10 mt-10">
       <div id="exit"
-        class="rounded-lg bg-light flex justify-center items-center w-1/3 h-10 drop-shadow-[0_5px_0_rgb(172,157,136)] cursor-pointer">
-        <p class="text-lg text-darkest">SALIR</p>
+        class="rounded-lg bg-light flex justify-center items-center w-1/3 h-10 drop-shadow-[0_5px_0_rgb(172,157,136)] cursor-pointer transform ease-in-out duration-300 hover:scale-95">
+        <p class="text-md sm:text-lg text-darkest text-center">SALIR</p>
       </div>
       <div id="next-round"
-        class="rounded-lg bg-grey flex justify-center items-center w-2/3 h-10 drop-shadow-[0_5px_0_rgb(63,60,60)] cursor-pointer">
-        <p class="text-lg text-darkest">SIGUIENTE RONDA</p>
+        class="rounded-lg bg-grey flex justify-center items-center w-2/3 h-10 drop-shadow-[0_5px_0_rgb(63,60,60)] cursor-pointer transform ease-in-out duration-300 hover:scale-95">
+        <p class="text-md sm:text-lg text-darkest text-center">SIGUIENTE RONDA</p>
       </div>
     </div>
   </div>

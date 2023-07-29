@@ -29,6 +29,14 @@
     }
   }
 
+  .rotate-on-hover {
+    transition: transform 0.3s ease;
+  }
+
+  .rotate-on-hover:hover {
+    transform: rotate(180deg);
+  }
+
   .rotate-izq {
     animation: rotateIzq 3s linear infinite; /* 6s representa el tiempo que tardará en dar una vuelta completa */
   }
@@ -43,17 +51,68 @@
 
   #title {
     font-family: "Hachi Maru Pop", cursive;
-    line-height: 110px;
     margin-top: 25px;
     margin-bottom: 90px;
   }
 
+  .title-min {
+    font-size: calc(12px + 1.5vw);
+  }
+
   .x::after {
-    content: url(/img/culo.png);
+    content: "";
+    display: inline-block;
+    background: url(/img/culo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 15vw;
+    max-width: 100px;
+    height: 15vw;
+    max-height: 100px;
+  }
+
+  .x-opa::after {
+    content: "";
+    display: inline-block;
+    background: url(/img/culo-opa.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 15vw;
+    max-width: 100px;
+    height: 15vw;
+    max-height: 100px;
   }
 
   .o::after {
-    content: url(/img/cara.png);
+    content: "";
+    display: inline-block;
+    background: url(/img/cara.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14vw;
+    max-width: 90px;
+    height: 14vw;
+    max-height: 90px;
+  }
+
+  .o-opa::after {
+    content: "";
+    display: inline-block;
+    background: url(/img/cara-opa.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 14vw;
+    max-width: 90px;
+    height: 14vw;
+    max-height: 90px;
+  }
+
+  .cursor-enabled {
+    cursor: not-allowed !important;
+  }
+
+  .w::after {
+    content: "";
   }
 
   .disabled {

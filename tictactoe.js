@@ -90,7 +90,8 @@ function resetGame() {
   turnsCount = "./img/culo.png";
 
   //Clears the disabled class from all cells
-  cells.forEach(cell => cell.classList.remove("disabled", "x", "o"));
+  cells.forEach(cell => cell.classList.remove("disabled", "x", "o", "cursor-not-allowed", "cursor-enabled"));
+  cells.forEach(cell => cell.classList.add("cursor-pointer"));
 
   //Calls counters to update the display
   counters();
@@ -113,6 +114,7 @@ function checkGameOver() {
       //Makes background dark on game over
       body.style.backgroundColor = "#0b131a";
       gameTable.style.opacity = "0.2";
+      gameTable.style.pointerEvents = "none";
     }
 
     //Check for winning combinations comparing xState/oState arrays with game.winningCombs
@@ -141,7 +143,7 @@ function checkGameOver() {
         //Makes background dark
         body.style.backgroundColor = "#0b131a";
         gameTable.style.opacity = "0.2";
-
+        gameTable.style.pointerEvents = "none";
       }
     });
   }
@@ -158,10 +160,14 @@ function callEventsOneVsOne(e) {
   //Checks if the clicked cell is not already disabled
   if (!target.classList.contains("disabled")) {
     target.classList.add("disabled");
+    target.classList.remove("cursor-pointer")
+    target.classList.add("cursor-not-allowed")
     //Adds the clicked cell value to X or O
     game.xTurn ? game.xState.push(cellValue) : game.oState.push(cellValue);
     //Adds the X or O symbol to the cell
+    e.stopPropagation()
     target.classList.add(game.xTurn ? "x" : "o");
+    target.classList.remove(game.xTurn ? "x-opa" : "o-opa");
     //Switches turn
     game.xTurn = !game.xTurn;
 
@@ -177,27 +183,35 @@ function callEventsOneVsOne(e) {
   }
 }
 
+function mouseOverOneVsOne(e) {
+  const target = e.target;
+  if (!target.classList.contains("disabled")) {
+    //If cell doesn't contain disabled adds X/O on hover
+    target.classList.add(game.xTurn ? "x-opa" : "o-opa");
+  }
+}
+
+// Function to handle mouseout for One vs One mode
+function mouseOutOneVsOne(e) {
+  const target = e.target;
+  //If cell doesn't contain disabled removes X/O on hover
+  if (!target.classList.contains("disabled")) {
+    target.classList.remove("x-opa", "o-opa");
+    
+  }
+}
+
 //1 vs 1 game
-function gameOneVsOne(cells, game) {
+function gameOneVsOne(cells) {
   cells.forEach(cell => {
     //Adds X/O on click by triggering callEventsOneVsOne
     cell.addEventListener("click", callEventsOneVsOne);
 
     //Adds X/O on hover
-    cell.addEventListener("mouseover", e => {
-      const target = e.target;
-      if (!target.classList.contains("disabled")) {
-        target.classList.add(game.xTurn ? "x" : "o");
-      }
-    });
+    cell.addEventListener("mouseover", mouseOverOneVsOne);
 
     //Removes X/O on hover
-    cell.addEventListener("mouseout", e => {
-      const target = e.target;
-      if (!target.classList.contains("disabled")) {
-        target.classList.remove("x", "o");
-      }
-    });
+    cell.addEventListener("mouseout", mouseOutOneVsOne);
   });
 
   counters(); 
@@ -213,12 +227,17 @@ function callEventsOneVsCPU(e) {
       const cellValue = target.dataset.value;
 
       //Checks if the clicked cell is not already disabled
-      if (!target.classList.contains("disabled")) {
+      if (!target.classList.contains("disabled") && game.xTurn) {
         target.classList.add("disabled");
+        target.classList.remove("cursor-pointer")
+        target.classList.add("cursor-not-allowed")
         //Adds the clicked cell value to X or O
         game.xTurn ? game.xState.push(cellValue) : game.oState.push(cellValue);
         //Adds the X or O symbol to the cell
-        target.classList.add(game.xTurn ? "x" : "o");
+        if (game.xTurn) {
+        e.stopPropagation()
+        target.classList.add("x")
+        target.classList.remove("x-opa")};
         //Switches turn
         game.xTurn = !game.xTurn;
 
@@ -236,31 +255,56 @@ function callEventsOneVsCPU(e) {
           setTimeout(() => makeCPUMove(game), 1000); 
         }
     };
+
 }
 
+//Handles mouseover for One vs CPU mode
+function mouseOverOneVsCPU(e) {
+  const target = e.target;
+  //If cell doesn't contain disabled adds X on hover
+  if (!target.classList.contains("disabled")) {
+    if (game.xTurn) {
+      target.classList.add("x-opa");
+      cells.forEach((cell) => {
+    {
+      e.stopPropagation;
+      cell.classList.remove("cursor-enabled");
+    } 
+  });
+    }
+  }
+  if (!game.xTurn) {
+    cells.forEach((cell) => {
+    {
+      e.stopPropagation;
+      cell.classList.add("cursor-enabled");
+    } 
+  });
+  }
+}
+
+//Handles mouseout for One vs CPU mode
+function mouseOutOneVsCPU(e) {
+  const target = e.target;
+  //If cell doesn't contain disabled removes X on hover
+  if (!target.classList.contains("disabled")) {
+    target.classList.remove("x-opa");
+  }
+}
+
+
 //1 vs. CPU game
-function gameOneVsCPU(cells, game) {
+function gameOneVsCPU(cells) {
   cells.forEach((cell) => {
     //Adds X/O on click by triggering callEventsOneVsCPU
     cell.addEventListener("click", callEventsOneVsCPU);
 
     //Adds X/O on hover
-    cell.addEventListener("mouseover", (e) => {
-      const target = e.target;
-      if (!target.classList.contains("disabled")) {
-        if (game.xTurn) {
-          target.classList.add("x");
-  }
-}
-    });
+    cell.addEventListener("mouseover", mouseOverOneVsCPU);
 
     //Removes X/O on hover
-    cell.addEventListener("mouseout", (e) => {
-      const target = e.target;
-      if (!target.classList.contains("disabled")) {
-        target.classList.remove("x");
-      }
-    });
+    cell.addEventListener("mouseout", mouseOutOneVsCPU);
+  
   });
 
   // Update turnsCount and call counters initially to display "Turn: X"
@@ -275,7 +319,6 @@ function makeCPUMove(game) {
 
   //Checks if there are any available cells to make a move
   if (availableCells.length > 0) {
-
     //Generates a random index to select a random available cell
     const randomIndex = Math.floor(Math.random() * availableCells.length);
     const selectedCell = availableCells[randomIndex];
@@ -283,6 +326,8 @@ function makeCPUMove(game) {
 
     //Simulates the CPU's move by adding the corresponding class and updating the game state
     selectedCell.classList.add("disabled", "o");
+    selectedCell.classList.remove("cursor-pointer")
+    selectedCell.classList.add("cursor-not-allowed")
     game.oState.push(cellValue);
     game.xTurn = true; // Switch back to X's turn
 
@@ -315,6 +360,7 @@ function exitGame() {
   //Resets background color and opacity
   body.style.backgroundColor = "";
   gameTable.style.opacity = "";
+  gameTable.style.pointerEvents = "initial";
 
   //Resets counters
   xWinsCount = 0;
@@ -322,13 +368,16 @@ function exitGame() {
   oWinsCount = 0;
   roundsCount = 1;
 
+  //Removes event listeners to reset game
   cells.forEach((cell) => {
     cell.removeEventListener("click", callEventsOneVsOne);
+    cell.removeEventListener("mouseover", mouseOverOneVsOne);
+    cell.removeEventListener("mouseout", mouseOutOneVsOne);
+    cell.removeEventListener("click", callEventsOneVsCPU);
+    cell.removeEventListener("mouseover", mouseOverOneVsCPU);
+    cell.removeEventListener("mouseout", mouseOutOneVsCPU);
   });
 
-  cells.forEach((cell) => {
-    cell.removeEventListener("click", callEventsOneVsCPU);
-  });
 
   counters();
 }
@@ -346,4 +395,5 @@ function nextRound() {
   //Resets background color and opacity
   body.style.backgroundColor = "";
   gameTable.style.opacity = "";
+  gameTable.style.pointerEvents = "initial";
 }
