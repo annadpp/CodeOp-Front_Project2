@@ -7,9 +7,9 @@ module.exports = {
         'dark': '#1A2A33',
         'darkest': '#0b131a',
         'middle': '#1F3540',
-        'turquoise': '#30C3BF',
-        'yellow': '#F1B236',
-        'light': '#A9BDC9'
+        'orange': '#F48730',
+        'grey': '#5A5555',
+        'light': '#F6F1E7'
       }
     },
   },

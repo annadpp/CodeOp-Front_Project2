@@ -7,26 +7,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="output.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/dd918bcd41.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
   <script src="tictactoe.js" defer></script>
   <script src="index.js" defer></script>
 
-  <title>❌⭕ Tres en raya</title>
+  <title>🐈‍⬛ GATITO TAC TOE 🐈‍⬛</title>
 </head>
 
 <body class="bg-dark flex flex-col justify-center items-center h-screen">
   <!-- Pantalla inicial -->
-  <div id="start" class="w-[520px]">
-    <div class="rounded-lg bg-middle p-5 my-5 h-[300px] flex flex-col text-center">
-      <p>xxxxx</p>
+  <div id="start" class="w-[550px] text-center ">
+    <div class="rounded-lg bg-middle p-5 my-5 h-[350px] flex flex-col text-center items-center">
+      <div id="title" class="flex flex-col text-light text-[100px] drop-shadow-[0_5px_0_rgb(172,157,136)]">
+        <p>gatito</p>
+        <p class="flex"><span class="inline rotate-izq">tac</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="inline rotate-der">toe</span>
+        </p>
+      </div>div>
+      <img class="mt-[-190px] w-[450px]" src="./img/651808.png" alt="">
     </div>
-    <div class="flex flex-col gap-y-5 mt-10">
+    <div class="flex flex-col gap-y-5 mt-10 w-full justify-center items-center">
       <div id="one-vs-CPU"
-        class="rounded-lg bg-yellow h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgba(158,116,29,0.75)] cursor-pointer">
-        <p>JUEGO NUEVO VS. CPU</p>
+        class="rounded-lg bg-grey h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgb(63,60,60)] cursor-pointer w-full">
+        <p class="text-xl text-darker">JUEGO NUEVO <span class="drop-shadow-[1px_1px_0_rgb(0,0,0)]">1 VS. CPU</span></p>
       </div>
       <div id="one-vs-one"
-        class="rounded-lg bg-turquoise h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgba(32,130,125,0.75)] cursor-pointer">
-        <p>JUEGO NUEVO 1 VS. 1</p>
+        class="rounded-lg bg-orange h-12 flex justify-center items-center drop-shadow-[0_5px_0_rgb(170,90,29)] cursor-pointer w-full">
+        <p class="text-xl text-darker">JUEGO NUEVO <span class="drop-shadow-[1px_1px_0_rgb(0,0,0)]">1 VS. 1</span></p>
+      </div>
+      <div
+        class="mb-10 inline-flex items-center justify-center text-sm bg-grey bg-opacity-20 w-[200px] rounded-lg py-1">
+        <p class="mr-2 text-darker">El jugador 1 siempre es</p>
+        <img src="./img/culo.png" alt="" class="w-[30px]">
       </div>
     </div>
   </div>
@@ -35,15 +51,17 @@
   <div id="game-table" class="hidden flex flex-col w-[520px]">
     <div id="info-top" class="grid grid-cols-3 gap-5">
       <div
-        class="bg-turquoise rounded-lg h-10 w-full drop-shadow-[0_5px_0_rgba(32,130,125,0.75)] flex flex-col justify-center items-center">
-        <p>RONDA <span id="rounds"></span></p>
+        class="bg-orange rounded-lg h-10 w-full drop-shadow-[0_5px_0_rgb(170,90,29)] flex flex-col justify-center items-center">
+        <p class="text-lg text-darkest">RONDA <span id="rounds" class="drop-shadow-[1px_1px_0_rgb(0,0,0)]"></span></p>
       </div>
-      <div
-        class="bg-yellow rounded-lg h-10 drop-shadow-[0_5px_0_rgba(158,116,29,0.75)] flex justify-center items-center">
-        <p>TURNO DE <span id="turns"></span></p>
+      <div class="bg-light rounded-lg h-10 drop-shadow-[0_5px_0_rgb(172,157,136)] flex justify-center items-center">
+        <div class="inline-flex items-center">
+          <p class="mr-2 text-lg">TURNO</p>
+          <img id="turns" src="" alt="" class="w-[30px]">
+        </div>
       </div>
       <div id="reset"
-        class="bg-light rounded-lg h-10 w-10 drop-shadow-[0_5px_0_rgba(106,131,139,0.75)] flex justify-self-end justify-center items-center cursor-pointer">
+        class="bg-grey rounded-lg h-10 w-10 drop-shadow-[0_5px_0_rgb(63,60,60)] flex justify-self-end justify-center items-center cursor-pointer">
         <i class="fa-solid fa-arrow-rotate-right"></i>
       </div>
     </div>
@@ -86,34 +104,43 @@
       </div>
     </div>
     <div id="info-bot" class="grid grid-cols-3 gap-5">
-      <div class="bg-turquoise rounded-lg h-20 flex flex-col justify-center items-center">
-        <p>GANADAS X</p>
-        <p id="wins-X"></p>
+      <div class="bg-orange rounded-lg h-20 flex flex-col justify-center items-center">
+        <div class="inline-flex items-center">
+          <p class="mr-2 text-lg text-darkest">GANADAS</p>
+          <img src="img/culo.png" alt="Your Image" class="w-[30px]">
+        </div>
+        <p id="wins-X" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-3xl"></p>
       </div>
       <div class="bg-light rounded-lg h-20 flex flex-col justify-center items-center">
-        <p>EMPATES</p>
-        <p id="draws"></p>
+        <p class="text-lg text-darkest">EMPATES</p>
+        <p id="draws" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-3xl"></p>
       </div>
-      <div class="bg-yellow rounded-lg h-20 flex flex-col justify-center items-center">
-        <p>GANADAS O</p>
-        <p id="wins-O"></p>
+      <div class="bg-grey rounded-lg h-20 flex flex-col justify-center items-center">
+        <div class="inline-flex items-center">
+          <p class="mr-2 text-lg text-darkest">GANADAS</p>
+          <img src="img/cara.png" alt="Your Image" class="w-[30px]">
+        </div>
+        <p id="wins-O" class="drop-shadow-[1px_1px_0_rgb(0,0,0)] text-darkest text-3xl"></p>
       </div>
     </div>
   </div>
 
   <!-- Missatge de final de partida -->
-  <div id="game-over" class="hidden absolute bg-dark h-[300px] flex flex-col justify-around w-full items-center">
+  <div id="game-over" class="hidden absolute bg-dark h-[380px] flex flex-col justify-around w-full items-center pt-10">
     <div id="game-over-text" class="flex flex-col text-light">
-      <p>xxxx</p>
-      <p class="mt-12 text-turquoise"><span class="text-2xl">x</span> xxxx</p>
+      <p class="text-center text-2xl">xxxx</p>
+      <img id="img-game-over" class="h-[150px] my-6" src="" alt="">
+      <p class="text-orange text-center">xxxx</p>
     </div>
-    <div class="flex gap-3 w-[250px]">
+    <div class="flex gap-3 w-[250px] pb-10 mt-10">
       <div id="exit"
-        class="rounded-lg bg-light flex justify-center items-center w-1/3 h-10 drop-shadow-[0_5px_0_rgba(106,131,139,0.75)] cursor-pointer">
-        SALIR</div>
+        class="rounded-lg bg-light flex justify-center items-center w-1/3 h-10 drop-shadow-[0_5px_0_rgb(172,157,136)] cursor-pointer">
+        <p class="text-lg text-darkest">SALIR</p>
+      </div>
       <div id="next-round"
-        class="rounded-lg bg-yellow flex justify-center items-center w-2/3 h-10 drop-shadow-[0_5px_0_rgba(158,116,29,0.75)] cursor-pointer">
-        SIGUIENTE RONDA</div>
+        class="rounded-lg bg-grey flex justify-center items-center w-2/3 h-10 drop-shadow-[0_5px_0_rgb(63,60,60)] cursor-pointer">
+        <p class="text-lg text-darkest">SIGUIENTE RONDA</p>
+      </div>
     </div>
   </div>
 </body>

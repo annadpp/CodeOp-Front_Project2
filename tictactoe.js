@@ -1,24 +1,25 @@
 /////////////* // MENU // */////////////
+const oneVsOne = document.getElementById("one-vs-one");
+const oneVsCPU = document.getElementById("one-vs-CPU");
+const gameTable = document.getElementById("game-table");
+const gameStart = document.getElementById("start");
 
-const oneVsOne = document.getElementById("one-vs-one")
-const oneVsCPU = document.getElementById("one-vs-CPU")
-const gameTable = document.getElementById("game-table")
-const gameStart = document.getElementById("start")
+oneVsOne.addEventListener("click", oneVsOneStart);
+oneVsCPU.addEventListener("click", oneVsCPUStart);
 
-oneVsOne.addEventListener("click", oneVsOneStart)
-oneVsCPU.addEventListener("click", oneVsCPUStart)
-
-
+//Triggers gameOneVsOne
 function oneVsOneStart() {
-  gameStart.classList.add("hidden")
-  gameTable.classList.remove("hidden")
+  gameStart.classList.add("hidden");
+  gameTable.classList.remove("hidden");
   gameOneVsOne(cells, game);
 }
 
+
+//Trigers gameOneVsCPU
 function oneVsCPUStart() {
-  gameStart.classList.add("hidden")
-  gameTable.classList.remove("hidden")
-  gameOneVsCPU(cells, game)
+  gameStart.classList.add("hidden");
+  gameTable.classList.remove("hidden");
+  gameOneVsCPU(cells, game);
 }
 
 
@@ -28,6 +29,10 @@ const cells = document.querySelectorAll("[data-cell]");
 const body = document.querySelector("body")
 const gameOver = document.getElementById("game-over")
 const reset = document.getElementById("reset")
+const gameOverText = document.getElementById("game-over-text");
+const firstParagraph = gameOverText.querySelector("p:first-child");
+const secondParagraph = gameOverText.querySelector("p:nth-child(3)");
+const imgGameOver = gameOverText.querySelector("img")
 
 //Keeps track of game and sets winning combinations
 const game = {
@@ -53,11 +58,11 @@ const game = {
 }
 
 //Counters
-let xWinsCount = 0
-let drawsCount = 0
-let oWinsCount = 0
-let roundsCount = 1
-let turnsCount = "X"
+let xWinsCount = 0;
+let drawsCount = 0;
+let oWinsCount = 0;
+let roundsCount = 1;
+let turnsCount = "./img/culo.png";
 
 const xWinsCounter = document.getElementById("wins-X");
 const drawsCounter = document.getElementById("draws");
@@ -65,41 +70,49 @@ const oWinsCounter = document.getElementById("wins-O");
 const roundsCounter = document.getElementById("rounds")
 const turnsCounter = document.getElementById("turns")
 
+//Adds text to counters
 function counters() {
- xWinsCounter.textContent = xWinsCount
- drawsCounter.textContent = drawsCount
- oWinsCounter.textContent = oWinsCount
- roundsCounter.textContent = roundsCount
- turnsCounter.textContent = turnsCount
+ xWinsCounter.textContent = xWinsCount;
+ drawsCounter.textContent = drawsCount;
+ oWinsCounter.textContent = oWinsCount;
+ roundsCounter.textContent = roundsCount;
+ turnsCounter.src = turnsCount;
 }
 
+//Resets game status
 function resetGame() {
-  //Resets game.xState and game.oState arrays
   game.xState = [];
   game.oState = [];
-  game.xTurn = true
+  game.xTurn = true;
   game.oTurn = false;
-  turnsCount = "X"
+
+  //Sets turnsCount to the default image for the first turn (player X)
+  turnsCount = "./img/culo.png";
 
   //Clears the disabled class from all cells
   cells.forEach(cell => cell.classList.remove("disabled", "x", "o"));
+
+  //Calls counters to update the display
+  counters();
 }
 
-reset.addEventListener("click", resetGame)
+//Triggers resetGame
+reset.addEventListener("click", resetGame);
 
 //Checks winner
 function checkGameOver() {
     //Checks if there are any playable cells left in the game -> means draw
     if (!document.querySelectorAll("[data-cell]:not(.disabled)").length) {
       gameOver.classList.remove("hidden");
-      firstParagraph.textContent = "The game of Schrödinger...";
-      secondParagraph.textContent = "Draw!";
-      drawsCount += 1
-      roundsCount += 1
+      firstParagraph.textContent = "¡Empate!";
+      imgGameOver.src = "./img/651804.png";
+      secondParagraph.textContent = "El juego de Schrödinger...";
+      drawsCount += 1;
+      roundsCount += 1;
 
-      //Makes background dark
-      body.style.backgroundColor = "#0b131a"
-      gameTable.style.opacity = "0.2"
+      //Makes background dark on game over
+      body.style.backgroundColor = "#0b131a";
+      gameTable.style.opacity = "0.2";
     }
 
     //Check for winning combinations comparing xState/oState arrays with game.winningCombs
@@ -112,22 +125,23 @@ function checkGameOver() {
         gameOver.classList.remove("hidden");
 
         if (xWins) {
-        firstParagraph.textContent = "You win!";
-        secondParagraph.textContent = "X wins";
+        firstParagraph.textContent = "¡El jugador 1 gana!";
+        imgGameOver.src = "./img/651793.png";
+        secondParagraph.textContent = "¡Miau!";
         xWinsCount += 1
         roundsCount += 1
         } else {
-        firstParagraph.textContent = "You lose";
-        secondParagraph.textContent = "O wins";
+        firstParagraph.textContent = "¡El jugador 2 gana!";
+        imgGameOver.src = "./img/651796.png";
+        secondParagraph.textContent = "¡Miau!";
         oWinsCount += 1
         roundsCount += 1
         }
 
         //Makes background dark
-        body.style.backgroundColor = "#0b131a"
-        gameTable.style.opacity = "0.2"
+        body.style.backgroundColor = "#0b131a";
+        gameTable.style.opacity = "0.2";
 
-        //Changes winning combination bg color
       }
     });
   }
@@ -136,63 +150,40 @@ function checkGameOver() {
 
 /////////////* // 1 v 1 // */////////////
 
-const gameOverText = document.getElementById("game-over-text");
-const firstParagraph = gameOverText.querySelector("p:first-child");
-const secondParagraph = gameOverText.querySelector("p:nth-child(2)");
-
-
+//Handles click events on OneVsOne
 function callEventsOneVsOne(e) {
   const target = e.target;
   const cellValue = target.dataset.value;
 
+  //Checks if the clicked cell is not already disabled
   if (!target.classList.contains("disabled")) {
     target.classList.add("disabled");
+    //Adds the clicked cell value to X or O
     game.xTurn ? game.xState.push(cellValue) : game.oState.push(cellValue);
+    //Adds the X or O symbol to the cell
     target.classList.add(game.xTurn ? "x" : "o");
+    //Switches turn
     game.xTurn = !game.xTurn;
 
-    checkGameOver(); // Calls the function to check for game over condition after every click
+    //Checks winning combinations
+    checkGameOver(); 
 
-    // Updates turnsCount and call counters after each move
-    const currentPlayer = game.xTurn ? "X" : "O";
+    //Updates turnsCount and call counters after each move
+    const currentPlayer = game.xTurn ? "./img/culo.png" : "./img/cara.png";
     turnsCount = currentPlayer;
 
+    //Updates counters
     counters();
   }
 }
 
-
-function callEventsOneVsCPU(e) {
-      const target = e.target;
-      const cellValue = target.dataset.value;
-
-      if (!target.classList.contains("disabled")) {
-        target.classList.add("disabled");
-        game.xTurn ? game.xState.push(cellValue) : game.oState.push(cellValue);
-        target.classList.add(game.xTurn ? "x" : "o");
-        game.xTurn = !game.xTurn;
-
-        checkGameOver(); // Calls the function to check for game over condition after every click
-
-        // Update turnsCount and call counters after each move
-        turnsCount = game.xTurn ? "X" : "O";
-        counters();
-
-        // If it's the CPU's turn, make a move after a short delay
-        if (!game.xTurn) {
-          setTimeout(() => makeCPUMove(game), 1000); // 1000ms delay before CPU move
-        }
-    };
-}
-
 //1 vs 1 game
 function gameOneVsOne(cells, game) {
-
   cells.forEach(cell => {
-    //Add X/O on click
+    //Adds X/O on click by triggering callEventsOneVsOne
     cell.addEventListener("click", callEventsOneVsOne);
 
-    //Add X/O on hover
+    //Adds X/O on hover
     cell.addEventListener("mouseover", e => {
       const target = e.target;
       if (!target.classList.contains("disabled")) {
@@ -200,6 +191,7 @@ function gameOneVsOne(cells, game) {
       }
     });
 
+    //Removes X/O on hover
     cell.addEventListener("mouseout", e => {
       const target = e.target;
       if (!target.classList.contains("disabled")) {
@@ -208,20 +200,51 @@ function gameOneVsOne(cells, game) {
     });
   });
 
-  counters(); // Call counters initially to display "Turn: X"
+  counters(); 
 }
 
 
 
 /////////////* // 1 v CPU // */////////////
 
+//Handles click events on OneVsCPU
+function callEventsOneVsCPU(e) {
+      const target = e.target;
+      const cellValue = target.dataset.value;
+
+      //Checks if the clicked cell is not already disabled
+      if (!target.classList.contains("disabled")) {
+        target.classList.add("disabled");
+        //Adds the clicked cell value to X or O
+        game.xTurn ? game.xState.push(cellValue) : game.oState.push(cellValue);
+        //Adds the X or O symbol to the cell
+        target.classList.add(game.xTurn ? "x" : "o");
+        //Switches turn
+        game.xTurn = !game.xTurn;
+
+        //Checks winning combinations
+        checkGameOver(); 
+
+        //Updates turnsCount and call counters after each move
+        turnsCount = game.xTurn ? "./img/culo.png" : "./img/cara.png";
+
+        //Updates counters
+        counters();
+
+        //Adds delay to CPU
+        if (!game.xTurn) {
+          setTimeout(() => makeCPUMove(game), 1000); 
+        }
+    };
+}
+
+//1 vs. CPU game
 function gameOneVsCPU(cells, game) {
-  
   cells.forEach((cell) => {
-    // Add X/O on click
+    //Adds X/O on click by triggering callEventsOneVsCPU
     cell.addEventListener("click", callEventsOneVsCPU);
 
-    // Add X/O on hover
+    //Adds X/O on hover
     cell.addEventListener("mouseover", (e) => {
       const target = e.target;
       if (!target.classList.contains("disabled")) {
@@ -231,6 +254,7 @@ function gameOneVsCPU(cells, game) {
 }
     });
 
+    //Removes X/O on hover
     cell.addEventListener("mouseout", (e) => {
       const target = e.target;
       if (!target.classList.contains("disabled")) {
@@ -240,58 +264,59 @@ function gameOneVsCPU(cells, game) {
   });
 
   // Update turnsCount and call counters initially to display "Turn: X"
-  turnsCount = "X";
+  turnsCount = "./img/culo.png";
   counters();
 }
 
+//"Brain" of the CPU
 function makeCPUMove(game) {
-  // Get all available cells (not yet disabled)
+  //Gets all available cells (not yet disabled)
   const availableCells = Array.from(cells).filter((cell) => !cell.classList.contains("disabled"));
 
-  // Check if there are any available cells to make a move
+  //Checks if there are any available cells to make a move
   if (availableCells.length > 0) {
-    // CPU is thinking, set the flag to true
 
-    // Generate a random index to select a random available cell
+    //Generates a random index to select a random available cell
     const randomIndex = Math.floor(Math.random() * availableCells.length);
     const selectedCell = availableCells[randomIndex];
     const cellValue = selectedCell.dataset.value;
 
-    // Simulate the CPU's move by adding the corresponding class and updating the game state
+    //Simulates the CPU's move by adding the corresponding class and updating the game state
     selectedCell.classList.add("disabled", "o");
     game.oState.push(cellValue);
     game.xTurn = true; // Switch back to X's turn
 
-    // Check for game over after the CPU's move
+    //Checks for game over after the CPU's move
     checkGameOver();
 
-    // Update turnsCount and call counters after the CPU's move
-    turnsCount = "X";
+    //Updates turnsCount and call counters after the CPU's move
+    turnsCount = "./img/culo.png";
     counters();
   }
 }
 
 
 /////////////* // GAME OVER // */////////////
-const exit = document.getElementById("exit")
-const next = document.getElementById("next-round")
+const exit = document.getElementById("exit");
+const next = document.getElementById("next-round");
 
-exit.addEventListener("click", exitGame)
-next.addEventListener("click", nextRound)
+exit.addEventListener("click", exitGame);
+next.addEventListener("click", nextRound);
 
+//How the game behaves when asked to exit
 function exitGame() {
-  // Hides the game-over message and show the game table
+  //Hides the game-over message and show the game table
   gameOver.classList.add("hidden");
   gameTable.classList.add("hidden");
   gameStart.classList.remove("hidden");
 
   resetGame();
 
-  // Resets background color and opacity
+  //Resets background color and opacity
   body.style.backgroundColor = "";
   gameTable.style.opacity = "";
 
-  // Resets counters
+  //Resets counters
   xWinsCount = 0;
   drawsCount = 0;
   oWinsCount = 0;
@@ -308,8 +333,9 @@ function exitGame() {
   counters();
 }
 
+//How the game behaves when asked to play next round
 function nextRound() {
-  // Hide the game-over message and show the game table
+  //Hides the game-over message and show the game table
   gameOver.classList.add("hidden");
   gameTable.classList.remove("hidden");
 
@@ -317,7 +343,7 @@ function nextRound() {
 
   counters();
 
-  // Reset background color and opacity
+  //Resets background color and opacity
   body.style.backgroundColor = "";
   gameTable.style.opacity = "";
 }

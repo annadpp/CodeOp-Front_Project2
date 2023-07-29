@@ -3,12 +3,57 @@
 @tailwind utilities;
 
 @layer components {
+  @keyframes rotateIzq {
+    0%,
+    100% {
+      transform: rotate(-5deg);
+    }
+    25% {
+      transform: rotate(5deg);
+    }
+    75% {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes rotateDer {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(5deg);
+    }
+    75% {
+      transform: rotate(-5deg);
+    }
+  }
+
+  .rotate-izq {
+    animation: rotateIzq 3s linear infinite; /* 6s representa el tiempo que tardará en dar una vuelta completa */
+  }
+
+  .rotate-der {
+    animation: rotateDer 3s linear infinite; /* 6s representa el tiempo que tardará en dar una vuelta completa */
+  }
+
+  body {
+    font-family: "Patrick Hand", cursive;
+  }
+
+  #title {
+    font-family: "Hachi Maru Pop", cursive;
+    line-height: 110px;
+    margin-top: 25px;
+    margin-bottom: 90px;
+  }
+
   .x::after {
-    content: "❌";
+    content: url(/img/culo.png);
   }
 
   .o::after {
-    content: "⭕";
+    content: url(/img/cara.png);
   }
 
   .disabled {
