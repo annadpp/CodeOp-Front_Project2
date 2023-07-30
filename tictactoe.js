@@ -197,7 +197,6 @@ function mouseOutOneVsOne(e) {
   //If cell doesn't contain disabled removes X/O on hover
   if (!target.classList.contains("disabled")) {
     target.classList.remove("x-opa", "o-opa");
-    
   }
 }
 
@@ -265,22 +264,19 @@ function mouseOverOneVsCPU(e) {
   if (!target.classList.contains("disabled")) {
     if (game.xTurn) {
       target.classList.add("x-opa");
-      cells.forEach((cell) => {
-    {
-      e.stopPropagation;
-      cell.classList.remove("cursor-enabled");
-    } 
-  });
-    }
+      }
   }
   if (!game.xTurn) {
-    cells.forEach((cell) => {
-    {
-      e.stopPropagation;
-      cell.classList.add("cursor-enabled");
-    } 
+  cells.forEach((cell) => {
+    // Add "cursor-enabled" class to the cell
+    cell.classList.add("cursor-enabled");
+
+    // Remove "cursor-enabled" class from the cell after 1 second
+    setTimeout(() => {
+      cell.classList.remove("cursor-enabled");
+    }, 1000);
   });
-  }
+}
 }
 
 //Handles mouseout for One vs CPU mode
